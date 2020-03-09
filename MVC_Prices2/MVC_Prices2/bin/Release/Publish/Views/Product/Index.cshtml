@@ -1,0 +1,381 @@
+﻿@using MVC_Prices2.Models
+@model MVC_Prices2.Models.Product
+@{
+    ViewBag.Title = "Product Details";
+}
+
+
+
+
+@if (Model == null)
+{
+    <div class="widget col-md-12 widget" style="height: 750px">
+        <div class="alert alert-danger topmargin text-center"><strong>Errore!</strong> Nessun prodotto selezionato !</div>
+    </div>
+}
+else
+{
+    if (Model.Id == 1)
+    {
+        @Html.Partial("_1");
+    }
+    else if (Model.Id == 3)
+    {
+        @Html.Partial("_3");
+    }
+    else if (Model.Id == 4)
+    {
+        @Html.Partial("_4");
+    }
+    else if (Model.Id == 5)
+    {
+        @Html.Partial("_5");
+    }
+    else if (Model.Id == 6)
+    {
+        @Html.Partial("_6");
+    }
+    else if (Model.Id == 7)
+    {
+        @Html.Partial("_7");
+    }
+    else if (Model.Id == 9)
+    {
+        @Html.Partial("_9");
+    }
+    else if (Model.Id == 10)
+    {
+        @Html.Partial("_10");
+    }
+    else if (Model.Id == 11)
+    {
+        @Html.Partial("_11");
+    }
+    else
+    {
+        @Html.Partial("_2");
+    }
+
+
+    <div class="row">
+        <div class="col-md-12 widget">
+
+
+
+            <!-- Preloader -->
+            <div id="preloader">
+                <div id="image"></div>
+            </div>
+            <!-- /Preloader -->
+
+
+
+
+            <center>
+                <form name="form1">
+
+
+                    <table width="100%" border="0" style="margin-top: 10px;">
+                        <tbody>
+                            <tr>
+                                <td width="50"></td>
+
+                                <td align="center">
+
+
+                                    <font face="Verdana" style="font-size: 13px; color: orangered;">
+                                        <b>@Model.ProductName.ToUpper()</b>
+                                    </font>
+                                    <input id="direction" type="checkbox" @if (Model.IsWingFixed) { @Html.Raw("disabled") } checked data-toggle="toggle" data-size="mini" data-on=" Destra" data-off=" Sinistra " data-onstyle="success" data-offstyle="info">
+                                    <input type="hidden" name="strona" value="2" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="50"></td>
+
+                                <td align="center">
+                                    <br />
+
+                                    <b>Sistema:</b>
+
+                                    <select name="system" onchange="imptotale();">
+                                        <option value="0" selected="">Pro 7006 ®</option>
+                                        <option value="2">Pro 7006 ® 2</option>
+                                        <option value="1">Pro 8106 ® 1</option>
+
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr></tr>
+                            <tr>
+                                <td align="right">
+                                    <font face="Verdana" style="font-size: 13px; color: blue;">
+                                        <b></b> <input type="hidden" name="wzmocnienie" onclick="imptotale();">
+                                    </font>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <font face="verdana" size="2">
+                        <table border="0">
+                            <tbody>
+                                <tr>
+                                    <td valign="middle">
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td valign="bottom">
+                                        <p align="left">
+
+                                        </p>
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <font face="Verdana" style="font-size: 12px;">
+                                            <div class="col-sm-7 col-md-7 pull-right" style="margin-right: 25px;">
+                                                <input name="wys" placeholder="Altezza" type="text" value="@Model.DefHeight" onchange="imptotale()" data-toggle="tooltip" data-placement="top" title="Altezza" onch data-plugin="TouchSpin" data-options="{ initval: 75,max:3500,min:0, postfix_extraclass: 'btn btn-default', buttondown_class: 'btn btn-info', buttonup_class: 'btn btn-info' }">
+                                            </div>
+                                            <br /><br /><br />
+                                            <p style="margin-left: 30px;" class="pull-right" style="font-size: 9px; font-family: Verdana;">
+                                                Pellicola simil-legno/colore in massa<br>
+                                                <img src="/Content/img/probkabianco.jpg" id="probka" style="border: silver 1px solid; width: 190px; height: 80px;">
+                                            </p>
+                                        </font>
+                                    </td>
+
+                                    <td>
+                                        <canvas id="mojCanvas" width="250" height="290"></canvas>
+
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                    <td class="pull-right">
+
+
+
+
+
+                                        <font face="Verdana" style="font-size: 12px; margin-right: 35px;">
+
+                                            <b>Colore:</b>
+                                            <select name="kolorprofili" onchange="imptotale();">
+                                                <option value="0" selected="">bianco</option>
+                                                <option value="0">laminate bianco</option>
+                                                <option value="1">golden oak</option>
+                                                <option value="2">noce</option>
+                                                <option value="3">mogano</option>
+                                                <option value="4">winchester</option>
+                                                <option value="8">verde muschio</option>
+                                            </select>
+                                        </font>
+                                    </td>
+
+                                    <td align="center" valign="middle">
+                                        <div style="margin-left: 25px;" class="col-sm-7 col-md-7">
+                                            <input name="szer" placeholder="Larghezza" type="text" value="@Model.DefWidth" onchange="imptotale()" data-toggle="tooltip" data-placement="top" title="Larghezza" onch data-plugin="TouchSpin" data-options="{ initval: 75,max:3500,min:0, postfix_extraclass: 'btn btn-default', buttondown_class: 'btn btn-info', buttonup_class: 'btn btn-info' }">
+                                        </div>
+                                        <br />
+                                        <br />
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="" valign="bottom">
+
+                                        <font face="Verdana" style="padding-left: 142px; font-size: 12px;">
+
+                                            <b>Arm Type:</b>
+
+                                            <input id="armfixed" type="checkbox" 
+                                                   @if (Model.IsArmFixed) { @Html.Raw("disabled") }
+                                                   checked data-toggle="toggle" data-size="mini" data-on="Standard" data-off="Special" data-onstyle="primary" data-offstyle="info">
+                                            
+                                        </font>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" valign="bottom">
+
+                                        <font face="Verdana" style="padding-left: 122px; font-size: 12px; display: none;" id="armbuttons">
+                                            <br/>
+                                            <div  style="padding-left: 160px; " class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-primary active" id="up">
+                                                    <input type="radio" name="armoptions" value="Up" id="up" autocomplete="off" ><i class="zmdi zmdi-upload"></i> Up
+                                                </label>
+                                                <label class="btn btn-primary" id="down">
+                                                    <input type="radio" name="armoptions" value="Down" id="down" autocomplete="off" checked><i class="zmdi zmdi-download"></i> Down
+                                                </label>
+
+                                            </div>
+                                            <select id="armcm" style="height: 35px;">
+                                                @for (int i = 1; i <=10; i++)
+                                                {
+                                                    <option value="@i">
+                                                        <b> @i</b>
+                                                    </option>
+                                                }
+                                            </select> - CM
+                                            
+                                        </font>
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="pull-right" valign="bottom">
+
+                                        <font face="Verdana" style="font-size: 12px;">
+                                            <br />
+                                            <b>Vetro;</b> <table>
+                                                @foreach (var el in (List<Glass>)ViewData["Glass"])
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @el.Description
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                <tr>
+                                                    <td>
+                                                        valore k: 1.1
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                            <select style="display: none;" name="konfiguracja" onchange="imptotale();">
+                                                <option value="0">basso emissivo</option>
+                                                <option value="1" selected="">stratificato 1 lato</option>
+                                                <option value="2">stratificato 2 lati</option>
+                                            </select>
+
+                                        </font>
+
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                    <td align="right">
+                                        <font face="Verdana" style="font-size: 12px;">
+                                            <!-- Tipo: -->
+                                            <select style="display: none;" name="kolorszkla" onchange="imptotale();">
+                                                <option value="0" selected="">doppio, trasparente</option>
+                                                <option value="1">doppio, satinato</option>
+                                                <option value="2">doppio, stampato C</option>
+                                                <option value="3">triplo, trasparente</option>
+                                                <option value="4">triplo, satinato</option>
+                                                <option value="5">triplo, stampato C</option>
+                                            </select>
+
+                                        </font>
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="center">
+                                        <font face="Verdana" style="font-size: 12px;">
+                                            <br>
+                                            <b>Numero pezzi:</b>
+
+                                            <select name="ilosc" onchange="imptotale();">
+                                                <option value="0" selected="">
+                                                    0
+                                                </option>
+                                                <option value="1">
+                                                    1
+                                                </option>
+                                                <option value="2">
+                                                    2
+                                                </option>
+                                                <option value="3">
+                                                    3
+                                                </option>
+                                                <option value="4">
+                                                    4
+                                                </option>
+                                                <option value="5">
+                                                    5
+                                                </option>
+                                                <option value="6">
+                                                    6
+                                                </option>
+                                                <option value="7">
+                                                    7
+                                                </option>
+                                                <option value="8">
+                                                    8
+                                                </option>
+                                                <option value="9">
+                                                    9
+                                                </option>
+                                                <option value="10">
+                                                    10
+                                                </option>
+                                            </select>
+
+
+
+                                        </font>
+
+
+
+
+                                        <font face="Verdana" style="font-size: 12px;">
+                                            Importo:
+                                            <input type="hidden" name="dodatki"> <span id="cenaokna" style="color: red; font-size: 16pt">0</span> €
+
+
+
+                                        </font>
+
+
+
+
+                                        &nbsp; &nbsp; &nbsp;
+                                        <a id="addtobasket" class="btn btn-success"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Aggiungi al preventivo</a>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+
+                    </font>
+                </form>
+            </center>
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+      
+        $(document).ready(function () {
+
+            $('#armfixed').on('change', function() {
+                var armdirection = $('#armfixed').is(':checked');
+
+                if (armdirection) {
+                    $('#armbuttons').hide();
+
+                } else {
+                    $('#armbuttons').show();
+                }
+            });
+
+        });
+       
+        function ArmUpDown() {
+
+            
+            var armdirect = $('input[name=armoptions]:checked').val();
+            var armdistance = 2;
+        }
+    </script>
+}

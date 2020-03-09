@@ -1,0 +1,256 @@
+﻿@using MVC_Prices2.Models
+@using Newtonsoft.Json
+@model MVC_Prices2.Models.Product
+@{
+    ViewBag.Title = "Product Details";
+}
+
+
+
+
+@if (Model == null)
+{
+    <div class="widget col-md-12 widget" style="height: 750px">
+        <div class="alert alert-danger topmargin text-center"><strong>Errore!</strong> Nessun prodotto selezionato !</div>
+    </div>
+}
+else
+{
+
+    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+
+    <div class="row">
+        <div class="col-md-12 widget">
+
+
+
+            <!-- Preloader -->
+            <div id="preloader">
+                <div id="image"></div>
+            </div>
+            <!-- /Preloader -->
+
+
+
+
+            <center>
+                <form name="form1">
+
+
+                    <table width="100%" border="0" style="margin-top: 10px;">
+                        <tbody>
+                            <tr>
+                                <td width="50"></td>
+
+                                <td align="center">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="50"></td>
+
+                                <td align="center">
+                                    <br />
+
+                                    <b>Sistema:</b>
+
+                                    <select name="system" id="system" onchange="Hesap();">
+                                        <option value="0" selected="">Pro 7006 ®</option>
+                                        <option value="2">Pro 7006 ® 2</option>
+                                        <option value="1">Pro 8106 ® 1</option>
+
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr></tr>
+                            <font face="verdana" size="2">
+                                <table border="0">
+                                    <tbody>
+                                        <tr>
+                                            <td valign="middle">
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="bottom">
+                                                <div>
+                                                    <img style="margin-left:150px;" id="kesit" width="170" class="kesit" src="~/Content/img/PRO7006.png" />
+                                                </div>
+                                                <font face="Verdana" style="font-size: 12px;">
+                                                    <div class="col-sm-7 col-md-7 pull-right" style="margin-right: 25px;">
+                                                        <input id="boy" name="wys" placeholder="Altezza" type="text" value="@Model.DefHeight" onchange="Hesap()" data-toggle="tooltip" data-placement="top" title="Altezza" onch data-plugin="TouchSpin" data-options="{ initval: 75,max:3500,min:0, postfix_extraclass: 'btn btn-default', buttondown_class: 'btn btn-info', buttonup_class: 'btn btn-info' }">
+                                                    </div>
+                                                    <br /><br /><br />
+                                                </font>
+                                            </td>
+
+                                            <td>
+                                                <canvas id="mojCanvas" width="250" height="290"></canvas>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td class="pull-right">
+
+
+
+
+
+                                                <font face="Verdana" style="font-size: 12px; margin-right: 35px;">
+
+                                                    <b>Colore:</b>
+                                                    <select id="renk" name="kolorprofili" onchange="Hesap();">
+                                                        <option id="0" value="0" selected="">bianco</option>
+                                                        <option id="1" value="0">laminate bianco</option>
+                                                        <option id="1" value="1">golden oak</option>
+                                                        <option id="1" value="2">noce</option>
+                                                        <option id="1" value="3">mogano</option>
+                                                        <option id="1" value="4">winchester</option>
+                                                        <option id="1" value="8">verde muschio</option>
+                                                    </select>
+                                                </font>
+                                            </td>
+
+                                            <td align="center" valign="middle">
+                                                <div style="margin-left: 25px;" class="col-sm-7 col-md-7">
+                                                    <input id="en" name="szer" placeholder="Larghezza" type="text" value="@Model.DefWidth" onchange="Hesap()" data-toggle="tooltip" data-placement="top" title="Larghezza" onch data-plugin="TouchSpin" data-options="{ initval: 75,max:3500,min:0, postfix_extraclass: 'btn btn-default', buttondown_class: 'btn btn-info', buttonup_class: 'btn btn-info' }">
+                                                </div>
+                                                <br />
+                                                <br />
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" align="center">
+                                                <font face="Verdana" style="font-size: 12px;">
+                                                    <br>
+                                                    <b>Numero pezzi:</b>
+                                                    
+                                                    <select id="miktar" name="ilosc" onchange="Hesap();">
+                                                        <option value="0" selected="">
+                                                            0
+                                                        </option>
+                                                        <option value="1">
+                                                            1
+                                                        </option>
+                                                        <option value="2">
+                                                            2
+                                                        </option>
+                                                        <option value="3">
+                                                            3
+                                                        </option>
+                                                        <option value="4">
+                                                            4
+                                                        </option>
+                                                        <option value="5">
+                                                            5
+                                                        </option>
+                                                        <option value="6">
+                                                            6
+                                                        </option>
+                                                        <option value="7">
+                                                            7
+                                                        </option>
+                                                        <option value="8">
+                                                            8
+                                                        </option>
+                                                        <option value="9">
+                                                            9
+                                                        </option>
+                                                        <option value="10">
+                                                            10
+                                                        </option>
+                                                    </select>
+
+
+
+                                                </font>
+
+
+
+
+                                                <font face="Verdana" style="font-size: 12px;">
+                                                    Importo:
+                                                    <input type="hidden" name="dodatki"> <span id="cenaokna" style="color: red; font-size: 16pt">0</span> €
+
+                                                    <span id="fiyat" style="color: red; font-size: 16pt">0</span>
+
+                                                </font>
+
+
+
+
+                                                &nbsp; &nbsp; &nbsp;
+                                                <a id="addtobasket" class="btn btn-success"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Aggiungi al preventivo</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+
+                            </font>
+                </form>
+            </center>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        var fiyatlar;
+        $(document).ready(function () {
+
+		GetDatas();
+        });
+        function GetDatas()
+        {
+            
+            $.ajax({
+                type: 'GET',
+                url: '/Deneme/Datas',
+                dataType: "JSON",
+                data: { id:@Model.Id},
+                success: function (data) {
+                    //for (var i = 5; i < 21; i++)
+                    //{
+                    //    for (var j = 6; j < 23; j++)
+                    //    {
+                    //        if (boy <= i * 100 && boy > (i * 100) - 100 && en <= j * 100 && en > (j * 100) - 100)
+                    //        {
+                    //            fiyat = data[i, j];
+                    //            var a = data[i, j];
+                    //        }
+                    //    }
+                    //}
+                    fiyatlar = data;
+                    
+                }
+
+            });
+            
+        }
+        function Hesap()
+        {
+            var miktar = document.getElementById("miktar").value;
+            var renk = $("select[name='kolorprofili'] option:selected").text();
+            var fiyat = 0;
+            var en = document.getElementById("en").value;
+            var boy = document.getElementById("boy").value;
+            for (var i = 0; i < fiyatlar["length"]; i++)
+            {
+                if (renk == "bianco") {
+                    if (en > fiyatlar[i].Width - 100 && en <= fiyatlar[i].Width && boy > fiyatlar[i].Height - 100 && boy <= fiyatlar[i].Height && fiyatlar[i].Color == false)
+                {
+                    fiyat = fiyatlar[i].Prices
+                    }
+                }
+                else {
+                    if (en > fiyatlar[i].Width - 100 && en <= fiyatlar[i].Width && boy > fiyatlar[i].Height - 100 && boy <= fiyatlar[i].Height && fiyatlar[i].Color == true)
+                {
+                    fiyat = fiyatlar[i].Prices
+                }}
+            }
+            var tutar = fiyat *miktar;
+            document.getElementById("fiyat").innerText = tutar;
+        }
+    </script>
+}
